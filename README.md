@@ -44,6 +44,7 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
+|title         |string     |null: false|
 |price         |integer    |null: false|
 |explanation   |text       |null: false|
 |category_id   |integer    |null: false|
@@ -62,13 +63,13 @@ Things you may want to cover:
 - has_one :log
 
 
-## shipping
+## shipping's
 |Column|Type|Options|
 |------|----|-------|
 |post          |string     |null: false|
 |prefectures_id|integer    |null: false|
 |city          |string     |null: false|
-|adress        |integer    |null: false|
+|adress        |string     |null: false|
 |building      |string     |           |
 |number        |string     |null: false|
 |log           |references | null: false, foreign_key: true |
@@ -78,7 +79,7 @@ Things you may want to cover:
 
 - belongs_to :log
 
-## log
+## logs
 
 |user    |references | null: false, foreign_key: true |
 |product |references | null: false, foreign_key: true |
