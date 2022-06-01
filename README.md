@@ -26,11 +26,10 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-
 |nickname          |string |null: false|
 |email             |string |null: false, unique: true|
 |encrypted_password|string |null: false|
-|birth_day         |integer|null: false|
+|birth_day         |date   |null: false|
 |first_name        |string |null: false|
 |last_name         |string |null: false|
 |first_furigana    |string |null: false|
@@ -49,7 +48,7 @@ Things you may want to cover:
 |explanation   |text       |null: false|
 |category_id   |integer    |null: false|
 |situation_id  |integer    |null: false|
-|load          |string     |null: false|
+|charge_id     |integer     |null: false|
 |prefectures_id|integer    |null: false|
 |user          |references | null: false, foreign_key: true |
 
@@ -64,12 +63,13 @@ Things you may want to cover:
 
 
 ## shipping
-
+|Column|Type|Options|
+|------|----|-------|
 |post          |string     |null: false|
 |prefectures_id|integer    |null: false|
 |city          |string     |null: false|
 |adress        |integer    |null: false|
-|building      |string     |
+|building      |string     |           |
 |number        |string     |null: false|
 |log           |references | null: false, foreign_key: true |
 
@@ -81,7 +81,7 @@ Things you may want to cover:
 ## log
 
 |user    |references | null: false, foreign_key: true |
-|products|references | null: false, foreign_key: true |
+|product |references | null: false, foreign_key: true |
 
 ### Association
 
