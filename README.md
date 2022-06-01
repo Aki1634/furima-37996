@@ -26,17 +26,18 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-（ここに追記していく）
-|nickname|string |null: false|
-|email   |string |null: false|
-|password|string |null: false|
-|date    |integer|null: false|
-|name    |string |null: false|
-|furigana|string |null: false|
 
+|nickname          |string |null: false|
+|email             |string |null: false, unique: true|
+|encrypted_password|string |null: false|
+|birth_day         |integer|null: false|
+|first_name        |string |null: false|
+|last_name         |string |null: false|
+|first_furigana    |string |null: false|
+|last_furigana     |string |null: false|
 
 ### Association
-（ここに追記していく）
+
 - has_many :products
 - has_many :logs
 
@@ -44,53 +45,46 @@ Things you may want to cover:
 
 |Column|Type|Options|
 |------|----|-------|
-|price      |string     |null: false|
-|explanation|text       |null: false|
-|category   |string     |null: false|
-|situation  |string     |null: false|
-|load       |string     |null: false|
-|prefectures|string     |null: false|
-|user       |references | null: false, foreign_key: true |
+|price         |integer    |null: false|
+|explanation   |text       |null: false|
+|category_id   |integer    |null: false|
+|situation_id  |integer    |null: false|
+|load          |string     |null: false|
+|prefectures_id|integer    |null: false|
+|user          |references | null: false, foreign_key: true |
 
 
-（ここに追記していく）
+
 
 
 ### Association
-（ここに追記していく）
+
 - belongs_to :user
 - has_one :log
 
 
 ## shipping
 
-|Column|Type|Options|
-|------|----|-------|
-（ここに追記していく）
-|post       |string     |null: false|
-|prefectures|string     |null: false|
-|city       |string     |null: false|
-|adress     |integer    |null: false|
-|building   |string     |
-|number     |integer    |null: false|
-|log        |references | null: false, foreign_key: true |
+|post          |string     |null: false|
+|prefectures_id|integer    |null: false|
+|city          |string     |null: false|
+|adress        |integer    |null: false|
+|building      |string     |
+|number        |string     |null: false|
+|log           |references | null: false, foreign_key: true |
 
 
 ### Association
-（ここに追記していく）
+
 - belongs_to :log
 
 ## log
 
-|Column|Type|Options|
-|------|----|-------|
-（ここに追記していく）
-|price   |string     | null: false|
 |user    |references | null: false, foreign_key: true |
 |products|references | null: false, foreign_key: true |
 
 ### Association
-（ここに追記していく）
+
 - belongs_to :user
-- belongs_to :products
+- belongs_to :product
 - has_one :shipping
