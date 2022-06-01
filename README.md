@@ -49,8 +49,9 @@ Things you may want to cover:
 |explanation   |text       |null: false|
 |category_id   |integer    |null: false|
 |situation_id  |integer    |null: false|
-|charge_id     |integer     |null: false|
+|charge_id     |integer    |null: false|
 |prefectures_id|integer    |null: false|
+|ship_day_id   |integer    |null: false|
 |user          |references | null: false, foreign_key: true |
 
 
