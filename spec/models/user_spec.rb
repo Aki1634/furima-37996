@@ -1,40 +1,107 @@
 require 'rails_helper'
- RSpec.describe User, type: :model do
-   describe "ユーザー新規登録" do
-     it "nicknameが空だと登録できない" do
-       user = User.new(nickname: "", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", first_name: "あ", last_name: "あ", first_furigana: "ア", last_furigana: "ア", birth_day: "1930-01-01")
-       user.valid?
-       expect(user.errors.full_messages).to include("Nickname can't be blank")
-     end
-     it "emailが空では登録できない" do
-       user = User.new(nickname: "a", email: "", password: "00000000", password_confirmation: "00000000", first_name: "あ", last_name: "あ", first_furigana: "ア", last_furigana: "ア", birth_day: "1930-01-01")
-       user.valid?
-       expect(user.errors.full_messages).to include("Email can't be blank")
-     end
-     it "first_nameが空だと登録できない" do
-      user = User.new(nickname: "a", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", first_name: "", last_name: "あ", first_furigana: "ア", last_furigana: "ア", birth_day: "1930-01-01")
-      user.valid?
-      expect(user.errors.full_messages).to include("First_name can't be blank")
-     end
-     it "last_nameが空だと登録できない" do
-      user = User.new(nickname: "a", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", first_name: "あ", last_name: "", first_furigana: "ア", last_furigana: "ア", birth_day: "1930-01-01")
-      user.valid?
-      expect(user.errors.full_messages).to include("Last_name can't be blank")
-     end
-     it "first_furiganaが空だと登録できない" do
-      user = User.new(nickname: "a", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", first_name: "あ", last_name: "あ", first_furigana: "", last_furigana: "ア", birth_day: "1930-01-01")
-      user.valid?
-      expect(user.errors.full_messages).to include("First_furigana can't be blank")
-     end
-     it "last_furiganaが空だと登録できない" do
-      user = User.new(nickname: "a", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", first_name: "あ", last_name: "あ", first_furigana: "ア", last_furigana: "", birth_day: "1930-01-01")
-      user.valid?
-      expect(user.errors.full_messages).to include("Last_furigana can't be blank")
-     end
-     it "birth_dayが空だと登録できない" douser = User.new(nickname: "a", email: "kkk@gmail.com", password: "00000000", password_confirmation: "00000000", first_name: "あ", last_name: "あ", first_furigana: "ア", last_furigana: "ア", birth_day: "")
-      user.valid?
-      expect(user.errors.full_messages).to include("Birth_day can't be blank")
-     end
+
+RSpec.describe User, type: :model do
+  before do
+    @user = FactoryBot.build(:user)
+  end
+
+  describe 'ユーザー新規登録' do
+    context '新規登録できる場合' do
+
+      it "入力フォームの条件を全て満たしていれば登録できる" do
+        expect(@user).to be_valid
+      end
+
+    end
+    context '新規登録できない場合' do
+
+      it "emailが空では登録できない" do
+        @user.email = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Email can't be blank")
+
+      end
+
+      it "passwordが空では登録できない" do
+        @user.password = ''
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password can't be blank")
+      end
+
+      it 'passwordが5文字以下では登録できない' do
+        @user.password = '12345'
+        @user.password_confirmation = '12345'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
+      end
+
+      it 'passwordが129文字以上では登録できない' do
+        @user.password =  Faker::Internet.password(min_length: 129)
+        @user.password_confirmation =  @user.password
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password is too long (maximum is 128 characters)')
+      end
+
+      it 'passwordとpassword_confirmationが不一致では登録できない' do
+        @user.password = 'a123456'
+        @user.password_confirmation = 'a1234567'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it '重複したemailが存在する場合は登録できない' do
+        @user.save
+        another_user = FactoryBot.build(:user, email: @user.email)
+        another_user.valid?
+        expect(another_user.errors.full_messages).to include('Email has already been taken')
+      end
+
+      it 'emailは@を含まないと登録できない' do
+        @user.email = 'testmail'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
+
+      it "first_nameが空では登録できない" do
+      @user.first_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name can't be blank")
+      end
     
-   end
- end
+      it "last_nameが空では登録できない" do
+      @user.last_name = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last name can't be blank")
+    end
+
+    it "first_furiganaが空では登録できない" do
+      @user.first_furigana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First furigana can't be blank")
+    end
+
+    it "last_furiganaが空では登録できない" do
+      @user.last_furigana = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Last furigana can't be blank")
+    end
+
+    it "birth_dayが空では登録できない" do
+      @user.birth_day = ''
+      @user.valid?
+      expect(@user.errors.full_messages).to include("Birth day can't be blank")
+    end
+
+    it "first_nameまたはlast_nameが全角ではない場合登録できない" do
+      @user.first_name = 'a'
+      @user.valid?
+      expect(@user.errors.full_messages).to include("First name に全角文字を使用してください")
+      end
+
+      it "first_furiganaまたはlast_furiganaがカタカナではない場合登録できない" do
+        @user.first_furigana = 'あ'
+        @user.valid?
+        expect(@user.errors.full_messages).to include("First furigana 全角カタカナのみで入力して下さい")
+      end
+  end
+  end
+end
