@@ -35,6 +35,27 @@ RSpec.describe User, type: :model do
         expect(@user.errors.full_messages).to include('Password is too short (minimum is 6 characters)')
       end
 
+      it '英字のみのパスワードでは登録できない' do
+        @user.password = 'abcdef'
+        @user.password_confirmation = 'abcdef'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password は6文字以上かつ英数字をそれぞれ含めてください')
+      end
+
+      it '数字のみのパスワードでは登録できない' do
+        @user.password = '123456'
+        @user.password_confirmation = '123456'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password は6文字以上かつ英数字をそれぞれ含めてください')
+      end
+
+      it '全角文字を含むパスワードでは登録できない' do
+        @user.password = 'あ12345a'
+        @user.password_confirmation = 'あ12345a'
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Password は6文字以上かつ英数字をそれぞれ含めてください')
+      end
+
       it 'passwordが129文字以上では登録できない' do
         @user.password =  Faker::Internet.password(min_length: 129)
         @user.password_confirmation =  @user.password
@@ -91,17 +112,29 @@ RSpec.describe User, type: :model do
       expect(@user.errors.full_messages).to include("Birth day can't be blank")
     end
 
-    it "first_nameまたはlast_nameが全角ではない場合登録できない" do
+    it "first_nameが全角ではない場合登録できない" do
       @user.first_name = 'a'
       @user.valid?
       expect(@user.errors.full_messages).to include("First name に全角文字を使用してください")
       end
 
-      it "first_furiganaまたはlast_furiganaがカタカナではない場合登録できない" do
-        @user.first_furigana = 'あ'
+      it "last_nameが全角ではない場合登録できない" do
+        @user.last_name = 'a'
         @user.valid?
-        expect(@user.errors.full_messages).to include("First furigana 全角カタカナのみで入力して下さい")
-      end
+        expect(@user.errors.full_messages).to include("Last name に全角文字を使用してください")
+        end
+
+        it "first_furiganaがカタカナではない場合登録できない" do
+          @user.first_furigana = 'あ'
+          @user.valid?
+          expect(@user.errors.full_messages).to include("First furigana 全角カタカナのみで入力して下さい")
+        end
+
+        it "last_furiganaがカタカナではない場合登録できない" do
+          @user.last_furigana = 'あ'
+          @user.valid?
+          expect(@user.errors.full_messages).to include("Last furigana 全角カタカナのみで入力して下さい")
+        end
   end
   end
 end
