@@ -6,8 +6,8 @@ class User < ApplicationRecord
          validates :nickname, presence: true
 
          with_options presence: true, format: { with: /\A[ぁ-ゔァ-ヴ\p{Ideographic}ａ-ｚＡ-Ｚ０-９]+\z/, message: 'に全角文字を使用してください' } do
-         validates :last_name, presence: true
-         validates :first_name, presence: true
+         validates :last_name
+         validates :first_name
          end
 
          validates :last_furigana, presence: true,
@@ -15,7 +15,7 @@ class User < ApplicationRecord
            with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/,
            message: "全角カタカナのみで入力して下さい"
          }
-         validates :first_furigana, presence: true ,
+         validates :first_furigana, presence: true,
          format: {
            with: /\A[\p{katakana}　ー－&&[^ -~｡-ﾟ]]+\z/,
            message: "全角カタカナのみで入力して下さい"
