@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class FurimaControllerTest < ActionDispatch::IntegrationTest
+class ProductControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
     get furima_index_url
     assert_response :success
