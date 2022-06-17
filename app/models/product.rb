@@ -5,8 +5,8 @@ class Product < ApplicationRecord
 
  extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :category
-  belongs_to_active_hash :Situation
-  belongs_to_active_hash :Prefectures
+  belongs_to_active_hash :situation
+  belongs_to_active_hash :prefecture
   belongs_to_active_hash :charge
   belongs_to_active_hash :ship_day
 
