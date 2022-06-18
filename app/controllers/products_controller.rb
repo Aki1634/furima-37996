@@ -1,6 +1,6 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, except: [:index, :create, :new]
-  # before_action :set_item, only: []
+   before_action :set_item, only: [:create, :new]
 
   def index
     # @products = Product.limit(10).order('id DESC')
