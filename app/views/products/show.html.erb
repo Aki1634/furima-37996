@@ -4,25 +4,25 @@
 <div class="item-show">
   <div class="item-box">
     <h2 class="name">
-      <%= @product.title %>
+      <%# <%= @product.title %> %>
     </h2>
     <div class="item-img-content">
-      <%= image_tag @product.image ,class:"item-box-img" %>
+      <%# <%= image_tag @product.image ,class:"item-box-img" %> %>
       <%# 商品が売れている場合は、sold outを表示しましょう %>
-      <% if @product.user != nil %>
+      <%# <% if @product.user != nil %> %>
       <div class="sold-out">
         <span>Sold Out!!</span>
       </div>
-       <% end %>
+       <%# <% end %> 
       <%# //商品が売れている場合は、sold outを表示しましょう %>
     </div>
     <div class="item-price-box">
       <span class="item-price">
         ¥ 999,999,999
-        <%= @product.price %>
+        <%# <%= @product.price %> %>
       </span>
       <span class="item-postage">
-        <%= @product.charge_id %>
+        <%# <%= @product.charge_id %> %>
       </span>
       
     </div>
