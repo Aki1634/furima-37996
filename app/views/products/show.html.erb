@@ -32,9 +32,9 @@
 <% if user_signed_in? && current_user.id == @product.user_id %>
   
 
-    <%= link_to "商品の編集", edit_product_path, method: :get, class: "item-red-btn" %>
+    <%# <%= link_to "商品の編集", edit_product_path, method: :get, class: "item-red-btn" %> %>
     <p class="or-text">or</p>
-    <%= link_to "削除", product_path, method: :delete, class:"item-destroy" %>
+    <%# <%= link_to "削除", product_path, method: :delete, class:"item-destroy" %> %>
 
 <% else user_signed_in? && current_user.id != @product.user_id && @product.user == nil%>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
@@ -45,33 +45,33 @@
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
 
     <div class="item-explain-box">
-      <span><%= @product.explanation %></span>
+      <%# <span><%= @product.explanation %></span> %>
     </div>
     <table class="detail-table">
       <tbody>
         <tr>
           <th class="detail-item">出品者</th>
-          <td class="detail-value"><%= @product.user.nickname %></td>
+          <%# <td class="detail-value"><%= @product.user.nickname %></td> %>
         </tr>
         <tr>
           <th class="detail-item">カテゴリー</th>
-          <td class="detail-value"><%= @product.category.name %></td>
+          <%# <td class="detail-value"><%= @product.category.name %></td> %>
         </tr>
         <tr>
           <th class="detail-item">商品の状態</th>
-          <td class="detail-value"><%= @product.situation.name %></td>
+          <%# <td class="detail-value"><%= @product.situation.name %></td> %>
         </tr>
         <tr>
           <th class="detail-item">配送料の負担</th>
-          <td class="detail-value"><%= @product.charge.name %></td>
+          <%# <td class="detail-value"><%= @product.charge.name %></td> %>
         </tr>
         <tr>
           <th class="detail-item">発送元の地域</th>
-          <td class="detail-value"><%= @product.prefectures.name %></td>
+          <%# <td class="detail-value"><%= @product.prefectures.name %></td> %>
         </tr>
         <tr>
           <th class="detail-item">発送日の目安</th>
-          <td class="detail-value"><%= @product.ship_day.name %></td>
+          <%# <td class="detail-value"><%= @product.ship_day.name %></td> %>
         </tr>
       </tbody>
     </table>
