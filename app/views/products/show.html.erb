@@ -38,7 +38,7 @@
 
 <% else user_signed_in? && current_user.id != @product.user_id && @product.user == nil%>
     <%# 商品が売れていない場合はこちらを表示しましょう %>
-    <%= link_to "購入画面に進む", user_registration_path ,class:"item-red-btn"%>
+    <%# <%= link_to "購入画面に進む", user_registration_path ,class:"item-red-btn"%> %>
     <%# //商品が売れていない場合はこちらを表示しましょう %>
 <% end %>
 
@@ -112,7 +112,7 @@
     </a>
   </div>
   <%# 詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
-  <a href="#" class="another-item"><%= @product.category.name %>をもっと見る</a>
+  <%# <a href="#" class="another-item"><%= @product.category.name %>をもっと見る</a> %>
   <%# //詳細ページで表示されている商品のカテゴリー名を表示しましょう %>
 </div>
 
