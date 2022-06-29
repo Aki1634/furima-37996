@@ -18,11 +18,10 @@
     </div>
     <div class="item-price-box">
       <span class="item-price">
-        ¥ 999,999,999
         <%= @product.price %> 
       </span>
       <span class="item-postage">
-        <%= @product.charge_id %>
+        <%= @product.charge.name %>
       </span>
       
     </div>
