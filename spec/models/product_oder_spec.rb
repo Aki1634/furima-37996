@@ -29,8 +29,8 @@ RSpec.describe ProductOrder, type: :model do
         @product_order.valid?
         expect(@product_order.errors.full_messages).to include("Postal code is invalid", "Postal code is the wrong length (should be 8 characters)")
       end
-      it 'prefecture_idが空だと購入できない' do
-        @product_order.prefecture_id = nil
+      it 'prefectures_idが空だと購入できない' do
+        @product_order.prefectures_id = nil
         @product_order.valid?
         expect(@product_order.errors.full_messages).to include("Prefecture can't be blank")
       end

@@ -17,7 +17,7 @@ class OrdersController < ApplicationController
         @product_order.save
         return redirect_to root_path
       else
-        render action: :index
+        render :index
       end
     end
   
@@ -28,7 +28,7 @@ class OrdersController < ApplicationController
     end
   
     def order_params
-      params.require(:product_order).permit(:postal_code, :prefecture_id, :city_name, :block_name, :building_name, :phone_number).merge(token: params[:token], product_id: params[:product_id], user_id: current_user.id )
+      params.require(:product_order).permit(:postal_code, :prefectures_id, :city_name, :block_name, :building_name, :phone_number).merge(token: params[:token], product_id: params[:product_id], user_id: current_user.id )
     end
   
     def pay_item
