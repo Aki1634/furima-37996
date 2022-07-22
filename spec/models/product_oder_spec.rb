@@ -1,19 +1,15 @@
 require 'rails_helper'
 
 RSpec.describe ProductOrder, type: :model do
-  describe '購入者情報の保存' do
     before do
       @product_order = FactoryBot.build(:product_order)
     end
-
+    describe '購入者情報の保存' do
       it '全ての項目が入力されていれば購入ができる' do
         expect(@product_order).to be_valid
       end
-      it 'token(クレジットカード情報)が空だと購入ができない' do
-        @product_order.token = nil
-        @product_order.valid?
-        expect(@product_order.errors.full_messages).to include("Token can't be blank")
-      end
+    end
+    context '商品を購入できない場合' do
       it '郵便番号が空だと購入ができない' do
         @product_order.postal_code = ""
         @product_order.valid?
@@ -21,7 +17,7 @@ RSpec.describe ProductOrder, type: :model do
       end
       it '郵便番号にハイフンがないと登録できない' do
         @product_order.postal_code = "12345678"
-        @productorder.valid?
+        @product_order.valid?
         expect(@product_order.errors.full_messages).to include("Postal code is invalid")
       end
       it '郵便番号が8桁でないと購入できない' do
@@ -32,7 +28,7 @@ RSpec.describe ProductOrder, type: :model do
       it 'prefectures_idが空だと購入できない' do
         @product_order.prefectures_id = nil
         @product_order.valid?
-        expect(@product_order.errors.full_messages).to include("Prefecture can't be blank")
+        expect(@product_order.errors.full_messages).to include("Prefectures can't be blank")
       end
       it 'city_nameが空だと購入できない' do
         @product_order.city_name = ""
@@ -56,3 +52,4 @@ RSpec.describe ProductOrder, type: :model do
       end
   end
 end
+
