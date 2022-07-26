@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
     before_action :set_item, only: [:index, :create]
   
     def index
-      if user_signed_in? && current_user.id != @product.user_id && @product.order == nil
+      if current_user.id != @product.user_id && @product.order == nil
         @product_order = ProductOrder.new
       else
         redirect_to root_path
