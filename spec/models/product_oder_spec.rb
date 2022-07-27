@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe ProductOrder, type: :model do
     before do
       @product_order = FactoryBot.build(:product_order)
+      @user = FactoryBot.build(:user)
+      @product = FactoryBot.build(:product)
     end
     describe '購入者情報の保存' do
       it '全ての項目が入力されていれば購入ができる' do
