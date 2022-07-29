@@ -26,8 +26,8 @@ class ProductsController < ApplicationController
 
   def edit
     unless current_user.id == @product.user_id && @product.order == nil
-    end
     redirect_to root_path
+    end
   end
 
   def update
