@@ -38,7 +38,7 @@ Things you may want to cover:
 ### Association
 
 - has_many :products
-- has_many :logs
+- has_many :order
 
 ## products
 
@@ -61,7 +61,6 @@ Things you may want to cover:
 ### Association
 
 - belongs_to :user
-- has_one :log
 
 
 ## shipping's
@@ -75,18 +74,3 @@ Things you may want to cover:
 |number        |string     |null: false|
 |log           |references | null: false, foreign_key: true |
 
-
-### Association
-
-- belongs_to :log
-
-## logs
-
-|user    |references | null: false, foreign_key: true |
-|product |references | null: false, foreign_key: true |
-
-### Association
-
-- belongs_to :user
-- belongs_to :product
-- has_one :shipping
