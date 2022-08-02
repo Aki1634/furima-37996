@@ -24,7 +24,6 @@ class User < ApplicationRecord
   validates :birth_day, presence: true
 
   validates :password, format: { with: /\A(?=.*?[a-z])(?=.*?\d)[a-z\d]+\z/i, message: 'は6文字以上かつ英数字をそれぞれ含めてください' }
-
   has_many :products
-  # has_many :logs
+  has_many :order
 end
